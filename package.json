@@ -3,6 +3,9 @@
   "version": "0.1.3",
   "description": "Validator for robots.txt and sitemaps listed in it",
   "main": "index.js",
+  "np": {
+    "yarn": false
+  },
   "bin": {
     "robots-validator": "./bin/robots-validator.js"
   },
@@ -23,8 +26,5 @@
     "eslint": "5.16.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2"
-  },
-  "np": {
-    "yarn": false
   }
 }
