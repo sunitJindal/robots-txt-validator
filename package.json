@@ -1,8 +1,11 @@
 {
   "name": "robots-txt-validator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Validator for robots.txt and sitemaps listed in it",
   "main": "index.js",
+  "bin": {
+    "robots-validator": "./bin/robots-validator.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "lint": "eslint lib --fix"
