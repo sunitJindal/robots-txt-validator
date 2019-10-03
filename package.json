@@ -3,15 +3,13 @@
   "version": "0.1.3",
   "description": "Validator for robots.txt and sitemaps listed in it",
   "main": "index.js",
-  "np": {
-    "yarn": false
-  },
   "bin": {
     "robots-validator": "./bin/robots-validator.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "lint": "eslint lib --fix"
+    "lint": "eslint lib --fix",
+    "release": "np --no-yarn"
   },
   "author": "Sunit Jindal <sunitjindal@gmail.com> (https://github.com/sunitJindal)",
   "license": "ISC",
