@@ -1,0 +1,45 @@
+html
+  head
+    style
+      include ./style.css
+  body
+    h1 Robots
+    h2 Raw data
+    pre=robots.original
+    h2 Validation data
+    table
+      thead
+        tr
+          th Path
+          th Valid domain
+          th Reachable
+      tbody
+        each val, index in robots.validationData.sitemap
+          tr
+            td
+              a(href=val.value, target='_blank')= val.value
+            td= val.validDomain ? '✓' : '❌'
+            td= val.reachable
+    hr
+    hr
+    h1 Sitemaps
+    each sitemap in sitemaps
+      h2= sitemap.url
+      table
+        thead
+          tr
+            th Path
+            th Type
+            th Reachable
+            th Total links
+        tbody
+          each val in sitemap.validatedData
+            tr
+              td
+                a(href=val.url, target='_blank')= val.url
+              td= val.contentType
+              td= val.status
+              td= val.linkCount
+              - console.log(val)
+
+

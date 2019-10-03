@@ -1,0 +1,42 @@
+body {
+  background: #f0f0f0;
+  max-width: 1024px;
+  margin: 0 auto;
+  font-size: 14px;
+  font-family: Roboto, 'Segoe UI', Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+pre {
+  font-family: monospace;
+  background-color: #fff;
+  width: em(440px);
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: .25em;
+  box-shadow: .1em .1em .5em rgba(0,0,0,.45);
+  padding: 20px 5px;
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  box-shadow: .1em .1em .5em rgba(0,0,0,.45);
+}
+
+table td, table th {
+  padding: 5px;
+  background-color: #fff;
+  border: 3px solid #f0f0f0;
+}
+
+a, a:visited, a:hover {
+  text-decoration: none;
+}
+a {
+  color: #1a0dab;
+}
