@@ -15,10 +15,10 @@ module.exports = async (site) => {
   const sitemapsValidationData = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const sitemapData of robotsData.sitemaps) {
-    eslint-disable-next-line no-await-in-loop
+    // eslint-disable-next-line no-await-in-loop
     const validationData = await sitemap.parse(sitemapData.value);
     if (validationData) {
-      // sitemapsValidationData.push(validationData);
+      sitemapsValidationData.push(validationData);
     }
   }
 
