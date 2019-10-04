@@ -31,6 +31,12 @@ module.exports = async (site) => {
       sitemaps: sitemapsValidationData,
     },
   );
+  const dir = './reports';
+
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
   fs.writeFile(
     './reports/index.html', content, (err) => {
       if (err) {
