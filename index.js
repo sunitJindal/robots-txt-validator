@@ -15,11 +15,11 @@ module.exports = async (site) => {
   const sitemapsValidationData = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const sitemapData of robotsData.sitemaps) {
-    // eslint-disable-next-line no-await-in-loop
-    // const validationData = await sitemap.parse(sitemapData.value);
-    // if (validationData) {
-    //   // sitemapsValidationData.push(validationData);
-    // }
+    eslint-disable-next-line no-await-in-loop
+    const validationData = await sitemap.parse(sitemapData.value);
+    if (validationData) {
+      // sitemapsValidationData.push(validationData);
+    }
   }
 
   // console.log(JSON.stringify(sitemapsValidationData));
@@ -43,8 +43,7 @@ module.exports = async (site) => {
       if (err) {
         return console.log(err);
       }
-      // open(reportPath, { app: 'google chrome' });
-      console.log(process.cwd());
+      open(reportPath, { app: 'google chrome' });
       console.log(`The file was saved @ ${path.resolve(process.cwd(), dir)}`);
       process.exit();
     },
