@@ -22,7 +22,7 @@ module.exports = async (site) => {
     }
   }
 
-  console.log(JSON.stringify(sitemapsValidationData));
+  // console.log(JSON.stringify(sitemapsValidationData));
 
   const content = pugjs.renderFile(
     path.resolve(cwd, './lib/template/report.pug'),
@@ -37,13 +37,14 @@ module.exports = async (site) => {
     fs.mkdirSync(dir);
   }
 
+  const reportPath = `./${dir}/index.html`;
   fs.writeFile(
-    './reports/index.html', content, (err) => {
+    reportPath, content, (err) => {
       if (err) {
         return console.log(err);
       }
-      open('./reports/index.html', { app: 'google chrome' })
-      console.log("The file was saved!");
+      open(reportPath, { app: 'google chrome' });
+      console.log(`The file was saved @ ${path.resolve(__dirname, dir)}`);
       process.exit();
     },
   );
