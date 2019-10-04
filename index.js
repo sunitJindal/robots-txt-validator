@@ -18,7 +18,7 @@ module.exports = async (site) => {
     // eslint-disable-next-line no-await-in-loop
     const validationData = await sitemap.parse(sitemapData.value);
     if (validationData) {
-      sitemapsValidationData.push(validationData);
+      // sitemapsValidationData.push(validationData);
     }
   }
 
@@ -44,7 +44,7 @@ module.exports = async (site) => {
         return console.log(err);
       }
       open(reportPath, { app: 'google chrome' });
-      console.log(`The file was saved @ ${path.resolve(__dirname, dir)}`);
+      console.log(`The file was saved @ ${path.resolve(dir)}`);
       process.exit();
     },
   );
