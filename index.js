@@ -3,6 +3,7 @@ const fs = require('fs');
 const open = require('open');
 const path = require('path');
 
+const logger = require('./lib/utils/logger');
 const robots = require('./lib/robots');
 const sitemap = require('./lib/sitemap');
 
@@ -11,7 +12,7 @@ const cwd = __dirname;
 module.exports = async (site) => {
   // @Todo validate site link
   const robotsData = await robots.parse(site);
-  // console.log(JSON.stringify(robotsData));
+  logger.log(JSON.stringify(robotsData));
   const sitemapsValidationData = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const sitemapData of robotsData.sitemaps) {
@@ -41,10 +42,10 @@ module.exports = async (site) => {
   fs.writeFile(
     reportPath, content, (err) => {
       if (err) {
-        return console.log(err);
+        return console.error(err);
       }
       open(reportPath, { app: 'google chrome' });
-      console.log(`The file was saved @ ${path.resolve(process.cwd(), dir)}`);
+      logger.log(`The file was saved @ ${path.resolve(process.cwd(), dir)}`);
       process.exit();
     },
   );
