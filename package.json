@@ -1,6 +1,6 @@
 {
   "name": "robots-txt-validator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Validator for robots.txt and sitemaps listed in it",
   "main": "index.js",
   "bin": {
