@@ -7,7 +7,7 @@
     "robots-validator": "./bin/robots-validator.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "npm run lint",
     "lint": "eslint lib --fix",
     "release": "np --no-yarn"
   },
