@@ -28,5 +28,15 @@
     "eslint": "5.16.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunitJindal/robots-txt-validator"
+  },
+  "contributors": [
+    {
+      "name": "Chandani Khurana",
+      "url": "https://github.com/chandani2411"
+    }
+  ]
 }
