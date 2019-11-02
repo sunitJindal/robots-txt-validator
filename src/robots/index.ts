@@ -1,4 +1,4 @@
-const fetch = require('../utils/fetch');
+import { get } from '../utils/fetch';
 const parser = require('./parser');
 const validator = require('./validator');
 
@@ -22,7 +22,7 @@ const getSitemaps = (tokenized) => {
 };
 
 exports.parse = async (domain) => {
-  const resp = await fetch.get(`${domain}/robots.txt`);
+  const resp = await get(`${domain}/robots.txt`);
   // const resp = {
   //   data: `User-agent: *
   //   Allow: /

@@ -18,7 +18,7 @@ const filterInput = (rows) => {
  * @param {String} row Rule or group line
  * @retuns { key:'token', value: 'value' }
  */
-const parseRow = (row) => {
+const parseRow = (row: string) => {
   const tokens = row.split(':');
   return { key: tokens.shift().toLowerCase(), value: tokens.join(':').trim() };
 };

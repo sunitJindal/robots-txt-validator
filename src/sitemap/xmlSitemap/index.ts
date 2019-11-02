@@ -94,7 +94,7 @@ const parseUrlset = async (data, url, type) => {
   return validatedInfo;
 };
 
-const parse = async ({ xmlContent, url, type }) => {
+const parse = async ({ xmlContent: string, url, type }) => {
   const transformedContent = await transformXmlToJson(xmlContent);
 
   // console.log(transformedContent);

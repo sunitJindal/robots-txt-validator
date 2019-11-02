@@ -3,7 +3,7 @@ const logger = require('../utils/logger');
 const contentType = require('../constants/contentType');
 const xmlSitemap = require('./xmlSitemap');
 
-exports.parse = async (url) => {
+exports.parse = async (url: string) => {
   logger.log('fetching sitemap', url);
   const resp = await fetch.get(url);
   if ((resp.headers['content-type'] === contentType.XML)
