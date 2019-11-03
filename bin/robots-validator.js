@@ -2,7 +2,7 @@
 
 const { argv } = require('yargs');
 
-const validator = require('../');
+const validator = require('../dist');
 
 
 (async () => {

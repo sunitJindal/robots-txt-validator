@@ -1,5 +1,5 @@
-const filterInput = (rows) => {
-  const filteredRows = [];
+const filterInput = (rows: string[]) => {
+  const filteredRows: string[] = [];
   // eslint-disable-next-line consistent-return
   rows.forEach((row) => {
     const trimmedRow = row.trim();
@@ -23,7 +23,7 @@ const parseRow = (row: string) => {
   return { key: tokens.shift().toLowerCase(), value: tokens.join(':').trim() };
 };
 
-module.exports = (data) => {
+export = (data: string): robots.TupleList => {
   const robotsRows = data.split('\n');
 
   const filteredRows = filterInput(robotsRows);

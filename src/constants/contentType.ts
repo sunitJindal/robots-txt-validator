@@ -1,5 +1,5 @@
-exports.XML = 'text/xml';
-exports.XML_UTF8 = 'text/xml;charset=UTF-8';
-exports.XML_APPLICATION = 'application/xml';
-exports.XML_APPLICATION_GZIP = 'application/x-gzip';
-exports.XML_ISO_8859_1 = 'text/xml;charset=ISO-8859-1';
+export const XML = 'text/xml';
+export const XML_UTF8 = 'text/xml;charset=UTF-8';
+export const XML_APPLICATION = 'application/xml';
+export const XML_APPLICATION_GZIP = 'application/x-gzip';
+export const XML_ISO_8859_1 = 'text/xml;charset=ISO-8859-1';

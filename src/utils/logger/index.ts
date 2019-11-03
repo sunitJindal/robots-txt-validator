@@ -1,9 +1,4 @@
-const debug = require('debug');
+export const createLogger = require('debug');
 
-const error = debug('error');
-const log = debug('log');
-
-exports.error = error;
-exports.log = log;
-
-exports.createLogger = debug;
+export const error = createLogger('error');
+export const log = createLogger('log');

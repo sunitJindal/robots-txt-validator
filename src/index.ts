@@ -9,7 +9,7 @@ const sitemap = require('./sitemap');
 
 const cwd = __dirname;
 
-export default async (site: string) => {
+export = async (site: string) => {
   // @Todo validate site link
   const robotsData = await robots.parse(site);
   logger.log(JSON.stringify(robotsData));
@@ -26,7 +26,7 @@ export default async (site: string) => {
   // console.log(JSON.stringify(sitemapsValidationData));
 
   const content = pugjs.renderFile(
-    path.resolve(cwd, './lib/template/report.pug'),
+    path.resolve(cwd, './template/report.pug'),
     {
       robots: robotsData,
       sitemaps: sitemapsValidationData,

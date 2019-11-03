@@ -1,20 +1,21 @@
-const fetch = require('../utils/fetch');
-const logger = require('../utils/logger');
-const contentType = require('../constants/contentType');
-const xmlSitemap = require('./xmlSitemap');
+import { get } from '../utils/fetch';
+import * as logger from '../utils/logger';
+import * as contentType from '../constants/contentType';
+import * as xmlSitemap from './xmlSitemap';
 
 exports.parse = async (url: string) => {
   logger.log('fetching sitemap', url);
-  const resp = await fetch.get(url);
-  if ((resp.headers['content-type'] === contentType.XML)
-    || (resp.headers['content-type'] === contentType.XML_UTF8)
-    || (resp.headers['content-type'] === contentType.XML_APPLICATION)
-    || (resp.headers['content-type'] === contentType.XML_APPLICATION_GZIP)) {
+  const resp = await get(url);
+  const trimmedContentType = resp.headers['content-type'].replace(' ', '');
+  if ((trimmedContentType === contentType.XML)
+    || (trimmedContentType === contentType.XML_UTF8)
+    || (trimmedContentType === contentType.XML_APPLICATION)
+    || (trimmedContentType === contentType.XML_APPLICATION_GZIP)) {
     const validatedData = await xmlSitemap.parse({ xmlContent: resp.data, url, type: resp.headers['content-type'] });
 
     return { validatedData, url };
   }
-  logger.error(`Unhandled content type[${resp.headers['content-type']}] for sitemap: ${url}`);
+  logger.error(`Unhandled content type[${contentType}] for sitemap: ${url}`);
 
   return undefined;
 };

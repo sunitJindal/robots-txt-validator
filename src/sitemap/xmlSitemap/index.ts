@@ -1,6 +1,6 @@
 const Xml2js = require('xml2js');
-const fetch = require('../../utils/fetch');
-const logger = require('../../utils/logger');
+import * as fetch from '../../utils/fetch';
+import * as logger from '../../utils/logger';
 
 const sitemapIndexLogger = logger.createLogger('sitemapIndex');
 const urlsetLogger = logger.createLogger('urlset');
@@ -12,9 +12,9 @@ const sitemapType = {
   URLSET: 'urlset',
 };
 
-const fetchSitemap = async (url) => fetch.get(url);
+const fetchSitemap = async (url: string) => fetch.get(url);
 
-const validateSitemapLink = async (url) => {
+const validateSitemapLink = async (url: string) => {
   try {
     logger.log(url);
     const resp = await fetch.head(url);
@@ -34,12 +34,12 @@ const validateSitemapLink = async (url) => {
   }
 };
 
-const getDetailsFromUrlset = (data) => {
+const getDetailsFromUrlset = (urlset: sitemap.Urlset) => {
   urlsetLogger('parsing');
   // console.log(data);
   try {
     const parsedInfo = {
-      linkCount: data.urlset.url.length,
+      linkCount: urlset.url.length,
     };
 
     return parsedInfo;
@@ -50,14 +50,14 @@ const getDetailsFromUrlset = (data) => {
   }
 };
 
-const transformXmlToJson = async (xmlContent) => parser.parseStringPromise(xmlContent);
+const transformXmlToJson = async (xmlContent: string) => parser.parseStringPromise(xmlContent);
 
-const parseSitemapIndex = async (data) => {
+const parseSitemapIndex = async (data: sitemap.IndexList): Promise<sitemap.ValidatedInfo[]> => {
   const validatedInfo = [];
   // eslint-disable-next-line no-restricted-syntax
-  for (const sitemap of data.sitemap) {
+  for (const sitemap of data) {
     // eslint-disable-next-line no-await-in-loop
-    const vi = await validateSitemapLink(sitemap.loc[0]);
+    const vi: sitemap.ValidatedInfo = await validateSitemapLink(sitemap.loc[0]);
 
     if (vi) {
       sitemapIndexLogger('fetching', vi.url);
@@ -69,7 +69,7 @@ const parseSitemapIndex = async (data) => {
       // eslint-disable-next-line no-await-in-loop
       const jsonChildSitemap = await transformXmlToJson(xmlChildSitemap.data);
 
-      const parsedChildSitemap = getDetailsFromUrlset(jsonChildSitemap);
+      const parsedChildSitemap = getDetailsFromUrlset(jsonChildSitemap.urlset);
       vi.linkCount = parsedChildSitemap.linkCount;
 
       validatedInfo.push(vi);
@@ -79,34 +79,35 @@ const parseSitemapIndex = async (data) => {
   return validatedInfo;
 };
 
-const parseUrlset = async (data, url, type) => {
+const parseUrlset = async (urlset: sitemap.Urlset, url: string, type: ContentType) : Promise<sitemap.ValidatedInfo[]> => {
   const validatedInfo = [];
+  const parsedChildSitemap = getDetailsFromUrlset(urlset);
+
   const vi = {
     url,
     contentType: type,
     status: 200,
+    linkCount: parsedChildSitemap.linkCount,
   };
-  const parsedChildSitemap = getDetailsFromUrlset(data);
-  vi.linkCount = parsedChildSitemap.linkCount;
 
   validatedInfo.push(vi);
 
   return validatedInfo;
 };
 
-const parse = async ({ xmlContent: string, url, type }) => {
+const parse = async ({ xmlContent, url, type }: { xmlContent: string, url: string, type: ContentType }): Promise<sitemap.ValidatedInfo[]> => {
   const transformedContent = await transformXmlToJson(xmlContent);
 
   // console.log(transformedContent);
-  let sitemapLinks = [];
+  let sitemapLinks: sitemap.ValidatedInfo[] = [];
 
   if (transformedContent[sitemapType.INDEX]) {
-    sitemapLinks = await parseSitemapIndex(transformedContent[sitemapType.INDEX]);
+    sitemapLinks = await parseSitemapIndex(transformedContent[sitemapType.INDEX].sitemap);
   } else if (transformedContent[sitemapType.URLSET]) {
-    sitemapLinks = await parseUrlset(transformedContent, url, type);
+    sitemapLinks = await parseUrlset(transformedContent.urlset, url, type);
   }
 
   return sitemapLinks;
 };
 
-exports.parse = parse;
+export { parse };

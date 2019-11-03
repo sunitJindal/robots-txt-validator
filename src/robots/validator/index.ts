@@ -1,12 +1,12 @@
 // sitemapExists
 const fetch = require('../../utils/fetch');
 
-exports.sitemap = async (sitemaps = [], domain) => {
+export const sitemap = async (sitemaps: robots.SitemapList, domain: string) => {
   const reports = [];
 
   // eslint-disable-next-line no-restricted-syntax
   for (const s of sitemaps) {
-    const report = { validDomain: true, ...s };
+    const report: sitemap.report = { validDomain: true, ...s };
     if (s.value.indexOf(domain) !== 0) {
       report.validDomain = false;
     }
