@@ -10,12 +10,14 @@ exports.parse = async (url: string) => {
   if ((trimmedContentType === contentType.XML)
     || (trimmedContentType === contentType.XML_UTF8)
     || (trimmedContentType === contentType.XML_APPLICATION)
-    || (trimmedContentType === contentType.XML_APPLICATION_GZIP)) {
+    || (trimmedContentType === contentType.XML_APPLICATION_GZIP
+    || (trimmedContentType === contentType.XML_ISO_8859_1))) {
     const validatedData = await xmlSitemap.parse({ xmlContent: resp.data, url, type: resp.headers['content-type'] });
 
     return { validatedData, url };
   }
-  logger.error(`Unhandled content type[${contentType}] for sitemap: ${url}`);
+  logger.log(trimmedContentType);
+  logger.error(`Unhandled content type[${trimmedContentType}] for sitemap: ${url}`);
 
   return undefined;
 };
