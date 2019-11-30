@@ -14,7 +14,7 @@
     "yarn.lock"
   ],
   "scripts": {
-    "test": "npm run lint",
+    "test": "",
     "lint": "eslint src --fix",
     "release": "np --no-yarn",
     "build": "npm run build-ts",
