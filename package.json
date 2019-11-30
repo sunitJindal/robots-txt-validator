@@ -11,8 +11,7 @@
     "dist",
     "bin",
     "README.md",
-    "yarn.lock",
-
+    "yarn.lock"
   ],
   "scripts": {
     "test": "npm run lint",
