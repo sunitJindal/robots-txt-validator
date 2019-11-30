@@ -3,13 +3,13 @@ const fs = require('fs');
 const open = require('open');
 const path = require('path');
 
-const logger = require('./lib/utils/logger');
-const robots = require('./lib/robots');
-const sitemap = require('./lib/sitemap');
+const logger = require('./utils/logger');
+const robots = require('./robots');
+const sitemap = require('./sitemap');
 
 const cwd = __dirname;
 
-module.exports = async (site) => {
+export = async (site: string) => {
   // @Todo validate site link
   const robotsData = await robots.parse(site);
   logger.log(JSON.stringify(robotsData));
@@ -26,7 +26,7 @@ module.exports = async (site) => {
   // console.log(JSON.stringify(sitemapsValidationData));
 
   const content = pugjs.renderFile(
-    path.resolve(cwd, './lib/template/report.pug'),
+    path.resolve(cwd, './template/report.pug'),
     {
       robots: robotsData,
       sitemaps: sitemapsValidationData,
@@ -40,7 +40,7 @@ module.exports = async (site) => {
 
   const reportPath = `./${dir}/index.html`;
   fs.writeFile(
-    reportPath, content, (err) => {
+    reportPath, content, (err: Error) => {
       if (err) {
         return console.error(err);
       }

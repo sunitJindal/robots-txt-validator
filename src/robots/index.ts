@@ -1,6 +1,6 @@
-const fetch = require('../utils/fetch');
-const parser = require('./parser');
-const validator = require('./validator');
+import { get } from '../utils/fetch';
+import parser from './parser';
+import * as validator from './validator';
 
 const RULE_GROUP_KEYS = {
   USER_AGENT: 'user-agent',
@@ -9,8 +9,8 @@ const RULE_GROUP_KEYS = {
   SITEMAP: 'sitemap',
 };
 
-const getSitemaps = (tokenized) => {
-  const sitemaps = [];
+const getSitemaps = (tokenized: robots.TupleList): robots.Sitemap[] => {
+  const sitemaps: robots.Sitemap[] = [];
 
   tokenized.forEach((t) => {
     if (t.key === RULE_GROUP_KEYS.SITEMAP) {
@@ -21,8 +21,8 @@ const getSitemaps = (tokenized) => {
   return sitemaps;
 };
 
-exports.parse = async (domain) => {
-  const resp = await fetch.get(`${domain}/robots.txt`);
+exports.parse = async (domain: string) => {
+  const resp = await get(`${domain}/robots.txt`);
   // const resp = {
   //   data: `User-agent: *
   //   Allow: /

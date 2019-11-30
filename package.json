@@ -6,10 +6,21 @@
   "bin": {
     "robots-validator": "./bin/robots-validator.js"
   },
+  "files": [
+    "package.json",
+    "dist",
+    "bin",
+    "README.md",
+    "yarn.lock"
+  ],
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint lib --fix",
-    "release": "np --no-yarn"
+    "lint": "eslint src --fix",
+    "release": "np --no-yarn",
+    "build": "npm run build-ts",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "prepublish": "npm run build"
   },
   "author": "Sunit Jindal <sunitjindal@gmail.com> (https://github.com/sunitJindal)",
   "license": "MIT",
@@ -25,9 +36,15 @@
     "yargs": "14.0.0"
   },
   "devDependencies": {
+    "@types/jest": "24.0.21",
+    "@types/node": "12.12.3",
     "eslint": "5.16.0",
     "eslint-config-airbnb-base": "14.0.0",
-    "eslint-plugin-import": "2.18.2"
+    "eslint-plugin-import": "2.18.2",
+    "jest": "24.9.0",
+    "ts-jest": "24.1.0",
+    "ts-node": "8.4.1",
+    "typescript": "3.6.4"
   },
   "repository": {
     "type": "git",
